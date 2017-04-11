@@ -15,17 +15,28 @@ import java.util.Map;
  */
 public class AsyncTaskRefactorMain {
 
+    //save the input file
     private static ArrayList<String> inputFile = new ArrayList<>();
+
+    //as the code is refactored, write it to this variable
     private static ArrayList<String> refact = new ArrayList<>();
+
+    //cache the global variables from async task
     private static HashMap<String, String> cachedGlobalVariables = new HashMap<>();
+
+    //cache for each section of the async task
     private LinkedHashMap<String, ArrayList<String>> asyncCached = new LinkedHashMap<>();
+
+    //list of each section contained in async task
     private static String[] asyncFunc = new String[] {"onPreExecute", "doInBackground",
             "onProgressUpdate", "onPostExecute", "extends AsyncTask"};
 
+    //constants for functions that need to be built
     private static final int LOADER_CALLBACK = 0;
     private static final int LOADER_CLASS = 1;
 
 
+    /*For each of the async task functions cache the respective sections*/
     public void CacheAsyncTaskFunctions(){
 
         //handle the functions dealing with async
@@ -43,7 +54,7 @@ public class AsyncTaskRefactorMain {
 
     }
 
-
+    /* Recreate the onCreate function the original async task code*/
     public void HandleAysncFromOnCreate(){
         HandleOnCreate create = new HandleOnCreate();
 
@@ -60,13 +71,19 @@ public class AsyncTaskRefactorMain {
         refact = create.HandleInstanceOfAsyncTask(refact, className);
     }
 
+    /* Two sections need to be built
+    * (1) build the abstract class of the loader callback
+    * (2) construct the static inner class that imitates async tasks*/
     public void HandleBuilder(int select){
         ArrayList<String> generatedSection = null;
 
+        //construct the loader callback abstract class
         if(select == 0) {
             LoaderCallbackBuilder build = new LoaderCallbackBuilder();
             generatedSection = build.GenerateLoaderCallbacks(refact, cachedGlobalVariables, asyncCached);
         }
+
+        //create the main inner class of the async task loader
         else if(select == 1) {
             AsyncTaskLoaderClassBuilder build = new AsyncTaskLoaderClassBuilder();
             generatedSection = build.GenerateAsyncClass(refact, asyncFunc, asyncCached, cachedGlobalVariables);
@@ -109,6 +126,8 @@ public class AsyncTaskRefactorMain {
 
 
     public static void main(String[] args){
+
+        //User needs to enter in the current location of the file
         String filePath = "/Users/Toby/Box Sync/CS597/Research Project/AsyncTaskRefactorMain.java";
 
         AsyncTaskRefactorMain async = new AsyncTaskRefactorMain();
@@ -124,7 +143,7 @@ public class AsyncTaskRefactorMain {
 
         //write to the new file
         try{
-            PrintWriter writer = new PrintWriter("Refactored.java", "UTF-8");
+            PrintWriter writer = new PrintWriter("RefactoredOutput.java", "UTF-8");
 
             for(String in: inputFile){
                 writer.print(in);
@@ -135,6 +154,7 @@ public class AsyncTaskRefactorMain {
             System.out.println(ex);
         }
 
+        //let the user know that the program has finished running
         System.out.println("Done");
     }
 

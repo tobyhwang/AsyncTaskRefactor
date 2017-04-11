@@ -42,6 +42,7 @@ public class LoaderCallbackBuilder {
     }
 
 
+    //creates onCreateLoader() for async task loader
     private ArrayList<String> BuildOnCreateLoader(){
 
         ArrayList<String> section = new ArrayList<>();
@@ -63,6 +64,7 @@ public class LoaderCallbackBuilder {
         return section;
     }
 
+    //creates onLoadFinished() for async task loader
     private ArrayList<String> BuildOnLoadFinished(){
         int loaderId = 1;
         String type1 = "String", type2 = "String";
@@ -76,6 +78,7 @@ public class LoaderCallbackBuilder {
         return section;
     }
 
+    //Creates onLoaderReset() for async task loader
     private ArrayList<String> BuildOnLoaderReset(){
         String type = "String";
         ArrayList<String> section = new ArrayList<>();

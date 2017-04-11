@@ -8,6 +8,7 @@ import java.util.Iterator;
 public class HandleOnCreate {
 
 
+    //Get the name of the async task class
     public String GetNameOfAsyncTaskFunction(ArrayList<String> section){
 
         for(String line : section)
@@ -23,6 +24,7 @@ public class HandleOnCreate {
 
     }
 
+    //Create an instance of async task loader in the abstract class
     public ArrayList<String> HandleInstanceOfAsyncTask(ArrayList<String> refact, String className){
         //Save the name of the instance
         String instance = "";
@@ -69,6 +71,7 @@ public class HandleOnCreate {
         return refact;
     }
 
+    //Get the parameters passed in the async task code
     private String GetParametersForExecute(String execute){
         StringBuilder params = new StringBuilder(execute);
 
@@ -81,6 +84,7 @@ public class HandleOnCreate {
 
     }
 
+    //recreate onCreate for async task loader
     public ArrayList<String> BuildOnCreate(String params){
         ArrayList<String> section = new ArrayList<>();
         section.add("\t\tBundle extras = new Bundle();\r");
@@ -89,6 +93,7 @@ public class HandleOnCreate {
         section.add("\t\tgetSupportLoaderManager().initLoader(1, extras, loaderCallbacks);\r");
         return section;
     }
+
 
     //Get the global variables, but don't remove them
     public ArrayList<String> GetGlobalVariables(ArrayList<String> refact){
@@ -118,6 +123,8 @@ public class HandleOnCreate {
         return globalVariables;
     }
 
+
+    //function to remove any empty lines
     public ArrayList<String> CleanEmptyLines(ArrayList<String> section, String instance)
     {
 

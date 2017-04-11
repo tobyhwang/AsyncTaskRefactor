@@ -47,6 +47,7 @@ public class AsyncTaskLoaderClassBuilder {
     }
 
 
+    //Get the variables needed for building the inner async task loader section
     private ArrayList<String> VariableSection(){
         ArrayList<String> section = GetBody(GetHashMapValueByKey("extends AsyncTask"));
 
@@ -76,6 +77,7 @@ public class AsyncTaskLoaderClassBuilder {
         return section;
     }
 
+    //Create the constructor for the inner class
     private ArrayList<String> ConstructorSection(){
         ArrayList<String> section = new ArrayList<>();
 
@@ -101,6 +103,7 @@ public class AsyncTaskLoaderClassBuilder {
         return section;
     }
 
+    //Create the onStartLoading() function - equivalent to onPreExecute()
     private ArrayList<String> OnStartLoading(){
         ArrayList<String> section = new ArrayList<>();
         section.add("\r");
@@ -112,6 +115,7 @@ public class AsyncTaskLoaderClassBuilder {
         return section;
     }
 
+    //Create the LoadInBackground() function - equivalent to doInBackground()
     private ArrayList<String> LoadInBackground(){
         ArrayList<String> section = new ArrayList<>();
         section.add("\r");
@@ -122,6 +126,7 @@ public class AsyncTaskLoaderClassBuilder {
         return section;
     }
 
+    //Create the PublishProgress() Function - equivalent to onProgressUpdate()
     private ArrayList<String> PublishProgress(){
         ArrayList<String> section = new ArrayList<>();
         section.add("\r");
@@ -138,6 +143,7 @@ public class AsyncTaskLoaderClassBuilder {
         return section;
     }
 
+    //Create Deliver results function - equivalent to onPostExecute()
     private ArrayList<String> DeliverResults(){
         ArrayList<String> section = new ArrayList<>();
         section.add("\r");
@@ -157,12 +163,7 @@ public class AsyncTaskLoaderClassBuilder {
     //Private functions that determine the parameters for the build functions
     //===========================================================================================
 
-    //TODO: Create the variables needed for the class
-    private ArrayList<String> GetVariables(){
-        ArrayList<String> initVariables = new ArrayList<>();
-        return initVariables;
-    }
-
+    //index into the hashmap toget the specific value
     private ArrayList<String> GetHashMapValueByKey(String function){
 
         int index = 0;
