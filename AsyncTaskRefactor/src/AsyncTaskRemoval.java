@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-/**
- * Remove the specific function from Aync Task
- */
+//===========================================================================================
+//This class holds the logic for removing any remnants of the AsyncTask object/implementation
+//===========================================================================================
+
 public class AsyncTaskRemoval {
 
     //attributes of the object

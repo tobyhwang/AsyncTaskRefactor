@@ -1,10 +1,10 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Created by Toby on 3/26/17.
- */
+//===========================================================================================
+//This class handles converting the instantiation of the AsyncTask object to AsyncTaskLoader
+//===========================================================================================
+
 public class HandleOnCreate {
 
 

@@ -1,21 +1,20 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
-/**
- * Created by Toby on 3/25/17.
- */
+
+//===========================================================================================
+//This class holds the logic for constructing the Loader callback concrete subclass
+//===========================================================================================
+
 public class LoaderCallbackBuilder {
 
+    //Global variables
     ArrayList<String> refact = null;
     HashMap<String, String> savedVariable = null;
     LinkedHashMap<String, ArrayList<String>> cachedSection = null;
 
 
-    //region Build Loader Callback
+    //region ***Build Loader Callback Concrete Subclass***
 
-    //===========================================================================================
-    //This section hold the logic for constructing the loader callback abstract class
-    //===========================================================================================
 
     public ArrayList<String> GenerateLoaderCallbacks(ArrayList<String> refact,
                                                      HashMap<String, String> savedVariable,
@@ -51,7 +50,7 @@ public class LoaderCallbackBuilder {
 
         //Use StringBuilder to handle varying parameter
         StringBuilder instance = new StringBuilder();
-        instance.append("return new AsyncTaskLoaderRunner(" + GetContext() +".this, bundle");
+        instance.append("return new AsyncTaskLoaderRunner(" + HandleVariables.GetContext(refact) +".this, bundle");
 
         for(String param : HandleVariables.GetParams(savedVariable, cachedSection)){
             instance.append(", " + param);
@@ -83,7 +82,7 @@ public class LoaderCallbackBuilder {
         String type = "String";
         ArrayList<String> section = new ArrayList<>();
 
-        section.add("\tOverride\r");
+        section.add("\t@Override\r");
         section.add("\tpublic void onLoaderReset(Loader<" + type + "> listLoader){}\r");
 
         return section;
@@ -91,30 +90,6 @@ public class LoaderCallbackBuilder {
 
     //endregion
 
-
-    //region Determine Parameters
-
-    //===========================================================================================
-    //Private functions to determine the parameters for the build functions
-    //===========================================================================================
-
-    //get the activity context and pass it to the loader
-    private String GetContext(){
-        String context = "";
-
-        //start at the top of the file
-        //find the first class, it will contain the context
-        for(String line : refact){
-            if(line.contains("public class")){
-                context = line.trim().split("\\s+")[2];
-                break;
-            }
-        }
-
-        return context;
-    }
-
-    //endregion
 
 
 }

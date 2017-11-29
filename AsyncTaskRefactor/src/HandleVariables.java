@@ -1,10 +1,11 @@
 import java.util.*;
 
-/**
- * Created by Toby on 3/29/17.
- */
-public class HandleVariables {
+//===========================================================================================
+//This class holds the logic for handling the variables from the AsyncTask Implementation
+//===========================================================================================
 
+
+public class HandleVariables {
 
     //Go through and determine which variables are used Async task
     public static ArrayList<String> GetParams(HashMap<String, String> savedVariable, LinkedHashMap<String, ArrayList<String>> cachedSection){
@@ -44,9 +45,24 @@ public class HandleVariables {
 
         }
 
-
         return usedVariable;
     }
 
+
+    //get the activity context and pass it to the loader
+    public static String GetContext(ArrayList<String> refact){
+        String context = "";
+
+        //start at the top of the file
+        //find the first class, it will contain the context
+        for(String line : refact){
+            if(line.contains("public class")){
+                context = line.trim().split("\\s+")[2];
+                break;
+            }
+        }
+
+        return context;
+    }
 
 }
